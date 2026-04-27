@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Coastal Escape
+
+A premium travel booking web app built with Next.js 16, featuring package browsing, secure payments, consultation scheduling, and automated booking confirmations.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 App Router
+- **Auth**: Clerk
+- **Database**: MongoDB + Mongoose
+- **Payments**: Stripe
+- **Email**: Resend
+- **Scheduling**: Cal.com
+- **Styling**: Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up environment variables
+
+Create a `.env.local` file in the root of the project:
+
+```dotenv
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+
+# MongoDB
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/coastal-escape
+
+# Stripe
+STRIPE_SECRET_KEY=sk_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+
+# Resend
+RESEND_API_KEY=re_...
+RESEND_FROM_EMAIL=tickets@yourdomain.com
+
+# Cal.com
+NEXT_PUBLIC_CAL_LINK=your-username/consultation
+```
+
+### 3. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Package browsing**: Explore travel packages with filtering
+- **Secure checkout**: Stripe-powered payments with webhook handling
+- **Booking tickets**: Unique token generated per booking
+- **Email confirmations**: Automated emails via Resend on booking
+- **Consultation scheduling**: Cal.com embed for 1:1 sessions
+- **User dashboard**: View and manage bookings
+- **Reviews**: Leave reviews on completed packages
 
-## Learn More
+## Data Models
 
-To learn more about Next.js, take a look at the following resources:
+| Model | Purpose |
+| --- | --- |
+| `Package` | Travel packages with pricing, images, itinerary |
+| `Booking` | User bookings linked to a package and ticket token |
+| `Review` | User reviews tied to a completed booking |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Important Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- The Stripe webhook route (`/api/stripe/webhook`) uses raw body parsing.
+- `RESEND_FROM_EMAIL` domain must be verified in the Resend dashboard before emails will send.
+- Use `auth()` in server components and `useAuth()` in client components for Clerk.
+- All MongoDB operations go through Mongoose models.
+- Validate all API inputs with Zod before touching the database.
 
-## Deploy on Vercel
+## Design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app uses the Coastal Escape color palette with:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Climate Crisis** display font for headings
+- **Instrument Serif** italic for taglines and pull quotes
+- **Montserrat** for UI elements such as buttons, labels, and navigation
