@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+/* ── Colour tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --color-ocean:     #378ADD;
+  --color-slate:     #2C2C2A;
+  --color-sand:      #F5F0E8;
+  --color-stone:     #D3D1C7;
+  --color-muted:     #5F5E5A;
+  --color-hint:      #888780;
+  --color-coral:     #D85A30;
+  --color-seagreen:  #0F6E56;
+  --color-ghostblue: #E6F1FB;
+  --color-white:     #FFFFFF;
+}
+
+/* ── Tailwind theme ────────────────────────────────────────────────────────── */
+@theme inline {
+  /* Colours */
+  --color-ocean:     var(--color-ocean);
+  --color-slate:     var(--color-slate);
+  --color-sand:      var(--color-sand);
+  --color-stone:     var(--color-stone);
+  --color-muted:     var(--color-muted);
+  --color-hint:      var(--color-hint);
+  --color-coral:     var(--color-coral);
+  --color-seagreen:  var(--color-seagreen);
+  --color-ghostblue: var(--color-ghostblue);
+  --color-white:     var(--color-white);
+
+  /* Fonts — CSS vars injected by next/font into <html> */
+  --font-display: var(--font-climate-crisis), 'Climate Crisis', cursive;
+  --font-serif:   var(--font-instrument-serif), 'Instrument Serif', serif;
+  --font-sans:    var(--font-montserrat), 'Montserrat', sans-serif;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  background-color: #F5F0E8;
+  color: #2C2C2A;
+  /* Prevent browser from synthesising fake bold/italic */
+  font-synthesis: none;
+}
+
+/* ── Typography utilities ──────────────────────────────────────────────────── */
+
+/* Climate Crisis — always large, always upright, tight tracking */
+.font-display {
+  font-family: var(--font-climate-crisis), 'Climate Crisis', cursive;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+/* Instrument Serif italic — taglines, pull quotes, emotional copy */
+.font-serif {
+  font-family: var(--font-instrument-serif), 'Instrument Serif', serif;
+}
+
+/* Convenience: use this for taglines (italic is the whole point) */
+.font-tagline {
+  font-family: var(--font-instrument-serif), 'Instrument Serif', serif;
+  font-style: italic;
+}
+
+/* ── Smooth image rendering ────────────────────────────────────────────────── */
+img {
+  image-rendering: auto;
+}
